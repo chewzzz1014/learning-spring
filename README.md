@@ -1,1 +1,2 @@
-# learning-spring
+**Resources**
+  - Spring in Action by Craig Walls
