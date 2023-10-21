@@ -4,6 +4,7 @@ import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 import sia.tacocloud.tacos.Ingredient;
 import sia.tacocloud.tacos.Ingredient.Type;
 import sia.tacocloud.tacos.Taco;
@@ -59,12 +60,13 @@ public class DesignTacoController {
     }
 
     @PostMapping
-    public String processTaco(Taco taco, @ModelAttribute TacoOrder tacoOrder) {
-        tacoOrder.addTacos(taco);
+    public String processTaco(Taco taco, @ModelAttribute TacoOrder tacoOrder, RedirectAttributes redirectAttributes) {
         System.out.println(taco);
         System.out.println(tacoOrder);
+        tacoOrder.addTaco(taco);
         log.info("Processing taco: {}", taco);
 
+        redirectAttributes.addFlashAttribute("tacoOrder", tacoOrder);
         return "redirect:/orders/current";
     }
 

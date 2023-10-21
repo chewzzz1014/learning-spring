@@ -16,7 +16,7 @@ public class TacoOrder {
     private String ccCVV;
     private List<Taco> tacos = new ArrayList<>();
 
-    public void addTacos(Taco taco) {
+    public void addTaco(Taco taco) {
         this.tacos.add(taco);
     }
 }
