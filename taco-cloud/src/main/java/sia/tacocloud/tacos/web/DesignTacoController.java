@@ -14,9 +14,9 @@ import sia.tacocloud.tacos.Taco;
 import sia.tacocloud.tacos.TacoOrder;
 import sia.tacocloud.tacos.data.IngredientRepository;
 
-import java.util.Arrays;
 import java.util.List;
 import java.util.stream.Collectors;
+import java.util.stream.StreamSupport;
 
 @Slf4j
 @Controller
@@ -39,7 +39,10 @@ public class DesignTacoController {
         for (Type type : types) {
             model.addAttribute(
                     type.toString().toLowerCase(),
-                    filterByType(ingredients, type)
+                    filterByType(StreamSupport
+                                    .stream(ingredients.spliterator(), false)
+                                    .collect(Collectors.toList())
+                                , type)
             );
         }
     }
