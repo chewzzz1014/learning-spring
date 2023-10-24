@@ -1,13 +1,13 @@
 package sia.tacocloud.tacos;
+import jakarta.persistence.Entity;
+import jakarta.persistence.Id;
 import lombok.AccessLevel;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
-import org.springframework.data.annotation.Id;
-import org.springframework.data.relational.core.mapping.Table;
 
 @Data // use lombok to auto generate getter, setter, constructor during compile time
-@Table
+@Entity
 @AllArgsConstructor
 @NoArgsConstructor(access= AccessLevel.PRIVATE, force = true)
 public class Ingredient {
