@@ -13,7 +13,9 @@ import sia.tacocloud.tacos.Ingredient.Type;
 import sia.tacocloud.tacos.Taco;
 import sia.tacocloud.tacos.TacoOrder;
 import sia.tacocloud.tacos.data.IngredientRepository;
+import sia.tacocloud.tacos.data.TacoRepository;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
 import java.util.stream.StreamSupport;
@@ -25,26 +27,12 @@ import java.util.stream.StreamSupport;
 public class DesignTacoController {
 
     private final IngredientRepository ingredientRepository;
+    private TacoRepository tacoRepository;
 
     @Autowired
-    public DesignTacoController(IngredientRepository ingredientRepository) {
+    public DesignTacoController(IngredientRepository ingredientRepository, TacoRepository tacoRepository) {
         this.ingredientRepository = ingredientRepository;
-    }
-
-    @ModelAttribute
-    public void addIngredientsToModel(Model model) {
-        Iterable<Ingredient> ingredients = ingredientRepository.findAll();
-
-        Type[] types = Type.values();
-        for (Type type : types) {
-            model.addAttribute(
-                    type.toString().toLowerCase(),
-                    filterByType(StreamSupport
-                                    .stream(ingredients.spliterator(), false)
-                                    .collect(Collectors.toList())
-                                , type)
-            );
-        }
+        this.tacoRepository = tacoRepository;
     }
 
     @ModelAttribute(name = "tacoOrder")
@@ -58,7 +46,19 @@ public class DesignTacoController {
     }
 
     @GetMapping
-    public String showDesignForm() {
+    public String addIngredientsToModel(Model model) {
+        List <Ingredient> ingredients = new ArrayList<>();
+        ingredientRepository.findAll().forEach(ele -> ingredients.add(ele));
+
+        Type[] types = Type.values();
+        for (Type type : types) {
+            model.addAttribute(
+                    type.toString().toLowerCase(),
+                    filterByType(ingredients, type)
+            );
+        }
+        System.out.println(ingredients);
+        System.out.println(model);
         return "design";
     }
 
@@ -77,7 +77,7 @@ public class DesignTacoController {
         return "redirect:/orders/current";
     }
 
-    private Iterable<Ingredient> filterByType(List<Ingredient> ingredients, Type type) {
+    private List<Ingredient> filterByType(List<Ingredient> ingredients, Type type) {
         return ingredients
                 .stream()
                 .filter(x -> x.getType().equals(type))
