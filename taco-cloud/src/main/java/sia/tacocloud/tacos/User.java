@@ -8,9 +8,13 @@ import lombok.AccessLevel;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 import lombok.RequiredArgsConstructor;
+import org.springframework.context.annotation.Bean;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
+import org.springframework.security.core.userdetails.UsernameNotFoundException;
+import sia.tacocloud.tacos.data.UserRepository;
+import sia.tacocloud.tacos.security.UserDetailsService;
 
 import java.util.Arrays;
 import java.util.Collection;
@@ -59,6 +63,16 @@ public class User implements UserDetails {
     @Override
     public boolean isEnabled() {
         return true;
+    }
+
+    @Bean
+    public UserDetailsService userDetailsService(UserRepository userRepository) {
+        return username -> {
+          User user = userRepository.findByUsername(username);
+          if (user != null) return user;
+
+          throw new UsernameNotFoundException("User '" + username + "' not found");
+        };
     }
 
 }
