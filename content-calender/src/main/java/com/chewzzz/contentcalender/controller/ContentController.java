@@ -3,6 +3,7 @@ package com.chewzzz.contentcalender.controller;
 import com.chewzzz.contentcalender.model.Content;
 import com.chewzzz.contentcalender.respository.ContentCollectionRepository;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.HttpStatusCode;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.server.ResponseStatusException;
@@ -33,6 +34,7 @@ public class ContentController {
         );
     }
 
+    @ResponseStatus(HttpStatus.CREATED)
     @PostMapping("")
     public void create(@RequestBody Content content) {
         System.out.println(content.toString());
