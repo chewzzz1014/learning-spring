@@ -31,7 +31,7 @@ public class ContentCollectionRepository {
     @PostConstruct
     private void init() {
         // executed after dependency injection is done to perform any initialization (after DI in ContentController constructor)
-        Content c = new Content(
+        Content content = new Content(
                         1,
                         "My First Blog Post",
                         "My first blog post",
@@ -41,10 +41,19 @@ public class ContentCollectionRepository {
                         null,
                         ""
                     );
-        contentList.add(c);
+        contentList.add(content);
     }
 
-    public void save(Content c) {
-        contentList.add(c);
+    public void save(Content content) {
+        contentList.removeIf(c -> c.id().equals(content.id()));
+        contentList.add(content);
+    }
+
+    public boolean existsById(Integer id) {
+        return contentList.stream().filter(c -> c.id().equals(id)).count() == 1;
+    }
+
+    public void delete(Integer id) {
+        contentList.removeIf(c -> c.id().equals(id));
     }
 }
