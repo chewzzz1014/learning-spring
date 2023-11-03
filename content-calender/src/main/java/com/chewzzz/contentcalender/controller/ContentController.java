@@ -2,6 +2,7 @@ package com.chewzzz.contentcalender.controller;
 
 import com.chewzzz.contentcalender.model.Content;
 import com.chewzzz.contentcalender.respository.ContentCollectionRepository;
+import com.chewzzz.contentcalender.respository.ContentJdbcTemplateRepository;
 import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
