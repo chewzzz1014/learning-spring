@@ -1,10 +1,7 @@
 package com.chewzzz.contentcalender.controller;
-
 import com.chewzzz.contentcalender.model.Content;
-import com.chewzzz.contentcalender.respository.ContentCollectionRepository;
-import com.chewzzz.contentcalender.respository.ContentJdbcTemplateRepository;
+import com.chewzzz.contentcalender.respository.ContentRepository;
 import jakarta.validation.Valid;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.HttpStatusCode;
 import org.springframework.web.bind.annotation.*;
@@ -18,10 +15,10 @@ import java.util.Optional;
 @CrossOrigin
 public class ContentController {
 
-    private final ContentCollectionRepository repository;
+    private final ContentRepository repository;
 
     // @Autowired is implicit annotated
-    public ContentController(ContentCollectionRepository repository) {
+    public ContentController(ContentRepository repository) {
         this.repository = repository;
     }
 
@@ -56,6 +53,6 @@ public class ContentController {
     @ResponseStatus(HttpStatus.NO_CONTENT)
     @DeleteMapping("/{id}")
     public void delete(@PathVariable Integer id) {
-        repository.delete(id);
+        repository.deleteById(id);
     }
 }
