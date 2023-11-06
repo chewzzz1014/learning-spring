@@ -24,7 +24,7 @@ PUT http://localhost:8080/api/content
 Content-Type: application/json
 
 {
-    "id": 1,
+    // "id": 1, // "id": 2, // no need to manually add id field
     "title": "HOHOHO MY FIRST POST!",
     "desc": "YAA MY FIRST POST!!!",
     "status": "IDEA",
