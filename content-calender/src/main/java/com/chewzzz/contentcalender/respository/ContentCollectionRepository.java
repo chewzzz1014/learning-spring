@@ -36,7 +36,7 @@ public class ContentCollectionRepository {
                         "My First Blog Post",
                         "My first blog post",
                         Status.IDEA,
-                        Type.ARTICLE,
+                        Type.VIDEO,
                         LocalDateTime.now(),
                         null,
                         ""
