@@ -21,22 +21,22 @@ public class ContentCalenderApplication {
 		SpringApplication.run(ContentCalenderApplication.class, args);
 	}
 
-	@Bean
-	CommandLineRunner commandLineRunner(ContentRepository contentRepository) {
-		return args -> {
-			// insert data into db
-			Content content = new Content(
-					null,
-					"Saying Hello from SpringBoot",
-					"Happy learning SpringBoot!",
-					Status.IDEA,
-					Type.VIDEO,
-					LocalDateTime.now(),
-					null,
-					""
-			);
-			contentRepository.save(content);
-		};
-	}
+//	@Bean
+//	CommandLineRunner commandLineRunner(ContentRepository contentRepository) {
+//		return args -> {
+//			// insert data into db
+//			Content content = new Content(
+//					null,
+//					"Saying Hello from SpringBoot",
+//					"Happy learning SpringBoot!",
+//					Status.IDEA,
+//					Type.VIDEO,
+//					LocalDateTime.now(),
+//					null,
+//					""
+//			);
+//			contentRepository.save(content);
+//		};
+//	}
 
 }
