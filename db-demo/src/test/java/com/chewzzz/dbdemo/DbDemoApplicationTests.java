@@ -1,10 +1,10 @@
-package com.chewzzz.quickstart;
+package com.chewzzz.dbdemo;
 
 import org.junit.jupiter.api.Test;
 import org.springframework.boot.test.context.SpringBootTest;
 
 @SpringBootTest
-class QuickstartApplicationTests {
+class DbDemoApplicationTests {
 
 	@Test
 	void contextLoads() {
