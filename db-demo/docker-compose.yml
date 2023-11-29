@@ -7,5 +7,5 @@ services:
       - "5432:5432"
     restart: always
     environment:
-      POSTGRES_USERNAME: postgres
+      POSTGRES_USER: postgres
       POSTGRES_PASSWORD: password
