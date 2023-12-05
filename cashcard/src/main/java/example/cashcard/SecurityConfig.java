@@ -20,7 +20,7 @@ class SecurityConfig {
         http
                 .authorizeHttpRequests(request -> request
                         .requestMatchers("/cashcards/**")
-                        .authenticated())
+                        .hasRole("CARD-OWNER"))
                 .csrf(csrf -> csrf.disable())
                 .httpBasic(Customizer.withDefaults());
         return http.build();
@@ -31,14 +31,20 @@ class SecurityConfig {
         return new BCryptPasswordEncoder();
     }
 
+
     @Bean
-    UserDetailsService testOnlyUsers(PasswordEncoder passwordEncoder) {
+    UserDetailsService testOnlyUsers(PasswordEncoder passwordEncoder) { // RBAC (Role Based Access Control)
         User.UserBuilder users = User.builder();
         UserDetails sarah = users
                 .username("sarah1")
                 .password(passwordEncoder.encode("abc123"))
-                .roles()
+                .roles("CARD-OWNER")
                 .build();
-        return new InMemoryUserDetailsManager(sarah);
+        UserDetails hankOwnsNoCards = users
+                .username("hank-owns-no-cards")
+                .password(passwordEncoder.encode("qrs456"))
+                .roles("NON-OWNER")
+                .build();
+        return new InMemoryUserDetailsManager(sarah, hankOwnsNoCards);
     }
 }

@@ -6,6 +6,7 @@ import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.json.JsonTest;
 import org.springframework.boot.test.json.JacksonTester;
+import org.springframework.http.ResponseEntity;
 
 import java.io.IOException;
 
@@ -46,17 +47,34 @@ class CashCardJsonTest {
 
     @Test
     void cashCardDeserializationTest() throws IOException {
-        String expected="""
-             [
-                { "id": 99, "amount": 123.45 },
-                { "id": 100, "amount": 100.00 },
-                { "id": 101, "amount": 150.00 }
-             ]
-         """;
-//        assertThat(json.parse(expected)).isEqualTo(new CashCard(99L, 123.45));
-//        assertThat(json.parseObject(expected).id()).isEqualTo(99);
-//        assertThat(json.parseObject(expected).amount()).isEqualTo(123.45);
-        assertThat(jsonList.parse(expected)).isEqualTo(cashCards);
+        String expected = """
+                {
+                    "id": 99,
+                    "amount": 123.45, 
+                    "owner": "sarah1"
+                }
+                """;
+        assertThat(json.parse(expected))
+                .isEqualTo(new CashCard(99L, 123.45, "sarah1"));
+        assertThat(json.parseObject(expected).id()).isEqualTo(99L);
+        assertThat(json.parseObject(expected).amount()).isEqualTo(123.45);
     }
 
+    @Test
+    void cashCardListSerializationTest() throws IOException {
+        assertThat(jsonList.write(cashCards)).isStrictlyEqualToJson("list.json");
+    }
+
+    @Test
+    void cashCardListDeserializationTest() throws IOException {
+        String expected = """
+                [
+                     {"id": 99, "amount": 123.45 , "owner": "sarah1"},
+                     {"id": 100, "amount": 1.00 , "owner": "sarah1"},
+                     {"id": 101, "amount": 150.00, "owner": "sarah1"}
+                                                  
+                ]
+                """;
+        assertThat(jsonList.parse(expected)).isEqualTo(cashCards);
+    }
 }
