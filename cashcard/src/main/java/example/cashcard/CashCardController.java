@@ -49,11 +49,19 @@ public class CashCardController {
     private ResponseEntity<Void> createCashCard(@RequestBody CashCard newCashCardRequest, UriComponentsBuilder ucb, Principal principal) {
         CashCard cashCardWithOwner = new CashCard(null, newCashCardRequest.amount(), principal.getName());
         CashCard savedCashCard = cashCardRepository.save(cashCardWithOwner);
-        
+
         URI locationOfNewCashCard = ucb
                 .path("/cashcards/{id}")
                 .buildAndExpand(savedCashCard.id())
                 .toUri();
         return ResponseEntity.created(locationOfNewCashCard).build();
+    }
+
+    @PutMapping("/{requestedId}")
+    private ResponseEntity<Void> putCashCard(@PathVariable Long requestedId, @RequestBody CashCard cashCardUpdate, Principal principal) {
+        CashCard cashCard = cashCardRepository.findByIdAndOwner(requestedId, principal.getName());
+        CashCard updatedCashCard = new CashCard(cashCard.id(), cashCardUpdate.amount(), principal.getName());
+        cashCardRepository.save(updatedCashCard);
+        return ResponseEntity.noContent().build();
     }
 }
