@@ -9,9 +9,9 @@
 		<relativePath/> <!-- lookup parent from repository -->
 	</parent>
 	<groupId>com.example</groupId>
-	<artifactId>gsws_ap_b_ex1</artifactId>
+	<artifactId>sq-ch4-ex1</artifactId>
 	<version>0.0.1-SNAPSHOT</version>
-	<name>gsws_ap_b_ex1</name>
+	<name>sq-ch4-ex1</name>
 	<description>Demo project for Spring Boot</description>
 	<properties>
 		<java.version>17</java.version>
@@ -26,11 +26,6 @@
 			<groupId>org.springframework.boot</groupId>
 			<artifactId>spring-boot-starter-test</artifactId>
 			<scope>test</scope>
-		</dependency>
-		<dependency>
-			<groupId>org.springframework</groupId>
-			<artifactId>spring-context</artifactId>
-			<version>5.2.6.RELEASE</version>
 		</dependency>
 	</dependencies>
 
