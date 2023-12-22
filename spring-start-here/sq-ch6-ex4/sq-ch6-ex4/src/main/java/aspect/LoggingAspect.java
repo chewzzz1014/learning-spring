@@ -35,7 +35,7 @@ public class LoggingAspect {
         logger.info("Method executed");
     }
 
-    @AfterReturning(value = "@annotation(ToLog)", returning = "returnedValue")
+    @AfterReturning(value = "@annotation(annotation.ToLog)", returning = "returnedValue")
     public void log(Object returnedValue) throws Throwable {
         logger.info("Method executed and returned " + returnedValue);
     }
