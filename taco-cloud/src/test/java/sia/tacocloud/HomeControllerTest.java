@@ -6,10 +6,10 @@ import org.springframework.boot.test.autoconfigure.web.servlet.WebMvcTest;
 import org.springframework.test.web.servlet.MockMvc;
 
 import static org.hamcrest.Matchers.containsString;
-import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.*;
+import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
 
-@WebMvcTest(HomeController.class)
+@WebMvcTest(HomeControllerTest.class)
 public class HomeControllerTest {
 
     @Autowired
@@ -19,9 +19,7 @@ public class HomeControllerTest {
     public void testHomePage() throws Exception {
         mockMvc.perform(get("/"))
                 .andExpect(status().isOk())
-                .andExpect(view().name("name"))
-                .andExpect(content().string(
-                        containsString("Welcome to...")
-                ));
+                .andExpect(view().name("home"))
+                .andExpect(content().string(containsString("Welcome to ...")));
     }
 }
