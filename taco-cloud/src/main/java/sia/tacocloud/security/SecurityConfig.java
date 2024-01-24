@@ -36,7 +36,7 @@ public class SecurityConfig {
     }
 
     @Bean
-    public UserDetailsService userDetailsService(UserRepository userRepository) {
+    public UserDetailsService userDetailsServices(UserRepository userRepository) {
         return username -> {
             sia.tacocloud.security.User user = userRepository.findByUsername(username);
             if (user != null) return user;
@@ -47,7 +47,22 @@ public class SecurityConfig {
 
     @Bean
     public SecurityFilterChain filterChain(HttpSecurity http) throws Exception {
+        http
+                .authorizeHttpRequests((authz) -> authz
+                        .requestMatchers("/design", "/orders").hasRole("USER")
+                        .requestMatchers("/", "/**").permitAll()
+                )
+                .formLogin(formLogin -> formLogin
+                        .loginPage("/login")
+                        .permitAll()
+                )
+                .oauth2Login(oauth2 -> oauth2
+                        .loginPage("/login")
+                        .permitAll()
+                )
+                .logout(formLogout -> formLogout
+                        .logoutSuccessUrl("/")
+                );
         return http.build();
     }
-
 }

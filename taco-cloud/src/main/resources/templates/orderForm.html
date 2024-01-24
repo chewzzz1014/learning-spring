@@ -7,6 +7,9 @@
     <link rel="stylesheet" th:href="@{/styles.css}">
 </head>
 <body>
+    <form th:action="@{/logout}" method="post">
+        <input type="submit" value="Logout" />
+    </form>
     <form th:action="@{/orders}" method="post" th:object="${tacoOrder}">
         <h1>Order your taco creations!</h1>
 
