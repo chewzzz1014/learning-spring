@@ -6,3 +6,19 @@ spring:
           github:
             clientId: <github-client-id>
             clientSecret: <github-client-secret>
+
+taco:
+  orders:
+    pageSize: 10
+
+logging:
+  level:
+    tacos: DEBUG
+
+---
+spring:
+  profiles: prod
+
+logging:
+  level:
+    tacos: WARN
