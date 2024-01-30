@@ -11,5 +11,8 @@
 <body>
     <h1>Welcome to ...</h1>
     <img th:src="@{/images/TacoCloud.png}" alt="">
+    <form th:action="@{/login}" method="post">
+        <input type="submit" value="Login" />
+    </form>
 </body>
 </html>
