@@ -4,7 +4,7 @@ spring:
       client:
         registration:
           github:
-            clientId: <github-client-id>
+            clientId: 122222222
             clientSecret: <github-client-secret>
 
 taco:
