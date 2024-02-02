@@ -13,10 +13,8 @@ import java.util.List;
 public class Taco {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
-
-    private Date createdAt = new Date();
 
     @NotNull
     @Size(min = 5, message = "Name must be at least 5 characters long")
@@ -26,4 +24,6 @@ public class Taco {
     @Size(min = 1, message = "You must choose at least 1 ingredient")
     @ManyToMany
     private List<Ingredient> ingredients;
+
+    private Date createdAt = new Date();
 }

@@ -52,8 +52,8 @@ public class OrderController {
             return "orderForm";
         }
 
+        log.info("1222222222 {}", order);
         order.setUser(user);
-
         orderRepository.save(order);
         log.info("Order submitted: {}", order);
         sessionStatus.setComplete();
