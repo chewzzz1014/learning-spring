@@ -5,6 +5,7 @@ import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.security.crypto.password.PasswordEncoder;
+import org.springframework.web.client.RestTemplate;
 import sia.tacocloud.model.Ingredient;
 import sia.tacocloud.model.Taco;
 import sia.tacocloud.repository.IngredientRepository;
@@ -72,5 +73,10 @@ public class ProjectConfig {
                     lettuce, salsa));
             tacoRepository.save(taco3);
         };
+    }
+
+    @Bean
+    public RestTemplate restTemplate() {
+        return new RestTemplate();
     }
 }

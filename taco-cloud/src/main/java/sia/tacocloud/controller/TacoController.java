@@ -1,18 +1,24 @@
 package sia.tacocloud.controller;
 
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.dao.EmptyResultDataAccessException;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Sort;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.client.RestTemplate;
+import sia.tacocloud.model.Ingredient;
 import sia.tacocloud.model.Taco;
 import sia.tacocloud.model.TacoOrder;
 import sia.tacocloud.repository.OrderRepository;
 import sia.tacocloud.repository.TacoRepository;
 
+import java.util.HashMap;
+import java.util.Map;
 import java.util.Optional;
 
+@Slf4j
 @RestController
 @RequestMapping(path = "/api/tacos", produces = "application/json")
 @CrossOrigin(origins = "http://tacocloud:8080")
@@ -20,10 +26,12 @@ public class TacoController {
 
     private TacoRepository tacoRepository;
     private OrderRepository orderRepository;
+    private RestTemplate restTemplate;
 
-    public TacoController(TacoRepository tacoRepository, OrderRepository orderRepository) {
+    public TacoController(TacoRepository tacoRepository, OrderRepository orderRepository, RestTemplate restTemplate) {
         this.tacoRepository = tacoRepository;
         this.orderRepository = orderRepository;
+        this.restTemplate = restTemplate;
     }
 
     @GetMapping(params = "recent")
@@ -94,4 +102,37 @@ public class TacoController {
 
         }
     }
+
+    // REST Template
+    public Ingredient getIngredientById(String ingredientId) {
+        Map<String, String> urlVariables = new HashMap<>();
+        urlVariables.put("id", ingredientId);
+        return restTemplate.getForObject("http://localhost:8080/ingredients/{id}", Ingredient.class, urlVariables);
+    }
+
+    public Ingredient getIngredientById2(String ingredientId) {
+        ResponseEntity<Ingredient> responseEntity = restTemplate.getForEntity("http://localhost:8080/ingredients/{id}", Ingredient.class, ingredientId);
+        log.info("Fetched time: {}", responseEntity.getHeaders().getDate());
+        return responseEntity.getBody();
+    }
+
+    public void updateIngredient(Ingredient ingredient) {
+        restTemplate.put("http://localhost:8080/ingredients/{id}", ingredient, ingredient.getId());
+    }
+
+    public void deleteIngredient(Ingredient ingredient) {
+        restTemplate.delete("http://localhost:8080/ingredients/{id}", ingredient.getId());
+    }
+
+    public Ingredient createIngredient(Ingredient ingredient) {
+        return restTemplate.postForObject("http://localhost:8080/ingredients/{id}", ingredient, Ingredient.class);
+    }
+
+    public Ingredient createIngredient2(Ingredient ingredient) {
+        ResponseEntity<Ingredient> responseEntity = restTemplate.postForEntity("http://localhost:8080/ingredients/{id}", ingredient, Ingredient.class);
+        log.info("New resource created at {}", responseEntity.getHeaders().getLocation());
+        return responseEntity.getBody();
+    }
+
+
 }
