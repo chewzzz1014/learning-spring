@@ -17,6 +17,7 @@ import org.springframework.web.bind.support.SessionStatus;
 import sia.tacocloud.model.TacoOrder;
 import sia.tacocloud.repository.OrderRepository;
 import sia.tacocloud.security.User;
+import sia.tacocloud.security.UserDetailsService;
 import sia.tacocloud.utils.OrderProps;
 
 @Slf4j
