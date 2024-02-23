@@ -5,23 +5,25 @@
 <beans>
 
     <bean id="triangle" class="com.example.SpringDemo.Triangle">
-        <property name="PointA" ref="zeroPoint"/>
-        <property name="PointB">
-            <bean class="com.example.SpringDemo.Point">
-                <property name="x" value="-20"/>
-                <property name="y" value="0"/>
-            </bean>
-        </property>
-        <property name="PointC">
-            <bean class="com.example.SpringDemo.Point">
-                <property name="x" value="0"/>
-                <property name="y" value="20"/>
-            </bean>
+        <property name="points">
+            <list>
+                <ref bean="zeroPoint"/>
+                <ref bean="Point2"/>
+                <ref bean="Point3"/>
+            </list>
         </property>
     </bean>
 
     <bean id="zeroPoint" class="com.example.SpringDemo.Point">
         <property name="x" value="0"/>
+        <property name="y" value="0"/>
+    </bean>
+    <bean id="Point2" class="com.example.SpringDemo.Point">
+        <property name="x" value="0"/>
+        <property name="y" value="20"/>
+    </bean>
+    <bean id="Point3" class="com.example.SpringDemo.Point">
+        <property name="x" value="-20"/>
         <property name="y" value="0"/>
     </bean>
 
