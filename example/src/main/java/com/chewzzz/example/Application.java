@@ -11,6 +11,8 @@ public class Application {
 
 		MyFirstService myFirstService = context.getBean("myFirstService", MyFirstService.class);
 		System.out.println(myFirstService.tellAStory());
+		System.out.println(myFirstService.getCustomProperty());
+		System.out.println(myFirstService.getCustomPropertyFromAnotherFile());
 	}
 
 }
