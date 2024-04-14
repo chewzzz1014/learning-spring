@@ -7,12 +7,7 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 public class Application {
 
 	public static void main(String[] args) {
-		var context = SpringApplication.run(Application.class, args);
-
-		MyFirstService myFirstService = context.getBean("myFirstService", MyFirstService.class);
-		System.out.println(myFirstService.tellAStory());
-		System.out.println(myFirstService.getCustomProperty());
-		System.out.println(myFirstService.getCustomPropertyFromAnotherFile());
+		SpringApplication.run(Application.class, args);
 	}
 
 }
