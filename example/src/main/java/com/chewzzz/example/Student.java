@@ -1,5 +1,7 @@
 package com.chewzzz.example;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 
 @Entity
@@ -23,6 +25,7 @@ public class Student {
     @JoinColumn(
             name = "school_id"
     )
+    @JsonBackReference
     private School school;
 
     public Student() {
