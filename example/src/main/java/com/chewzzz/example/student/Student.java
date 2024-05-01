@@ -1,7 +1,8 @@
-package com.chewzzz.example;
+package com.chewzzz.example.student;
 
+import com.chewzzz.example.schoolprofile.StudentProfile;
+import com.chewzzz.example.school.School;
 import com.fasterxml.jackson.annotation.JsonBackReference;
-import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 
 @Entity

@@ -1,5 +1,6 @@
-package com.chewzzz.example;
+package com.chewzzz.example.schoolprofile;
 
+import com.chewzzz.example.student.Student;
 import jakarta.persistence.*;
 
 @Entity

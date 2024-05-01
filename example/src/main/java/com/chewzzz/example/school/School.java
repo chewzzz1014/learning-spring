@@ -1,5 +1,6 @@
-package com.chewzzz.example;
+package com.chewzzz.example.school;
 
+import com.chewzzz.example.student.Student;
 import com.fasterxml.jackson.annotation.JsonManagedReference;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;

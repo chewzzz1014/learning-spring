@@ -1,4 +1,4 @@
-package com.chewzzz.example;
+package com.chewzzz.example.school;
 
 import org.springframework.data.jpa.repository.JpaRepository;
 
