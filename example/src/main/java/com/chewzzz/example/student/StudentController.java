@@ -1,8 +1,13 @@
 package com.chewzzz.example.student;
 
+import jakarta.validation.Valid;
 import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
+import org.springframework.validation.FieldError;
+import org.springframework.web.bind.MethodArgumentNotValidException;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.HashMap;
 import java.util.List;
 
 @RestController
@@ -30,7 +35,7 @@ public class StudentController {
     }
 
     @PostMapping("/students")
-    public StudentResponseDto postStudent(@RequestBody StudentDto dto) {
+    public StudentResponseDto postStudent(@Valid @RequestBody StudentDto dto) {
         return studentService.createStudent(dto);
     }
 
@@ -38,5 +43,18 @@ public class StudentController {
     @ResponseStatus(HttpStatus.OK)
     public void deleteStudent(@PathVariable("student-id") Integer id) {
         studentService.deleteStudent(id);
+    }
+
+    @ExceptionHandler(MethodArgumentNotValidException.class)
+    public ResponseEntity<?> handleMethodArgumentNotValidException(MethodArgumentNotValidException err) {
+        // key: field name; value: err msg
+        var errors = new HashMap<String, String>();
+        err.getBindingResult().getAllErrors()
+                .forEach(error -> {
+                    var fieldName = ((FieldError) error).getField();
+                    var errorMessage = error.getDefaultMessage();
+                    errors.put(fieldName, errorMessage);
+                });
+        return new ResponseEntity<>(errors, HttpStatus.BAD_REQUEST);
     }
 }

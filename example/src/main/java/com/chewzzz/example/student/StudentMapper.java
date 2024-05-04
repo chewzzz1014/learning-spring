@@ -7,6 +7,10 @@ import org.springframework.stereotype.Service;
 public class StudentMapper {
 
     public Student toStudent(StudentDto dto) {
+        if(dto == null) {
+            throw new NullPointerException("Student Dto should not be null");
+        }
+
         var student = new Student();
         student.setFirstname(dto.firstname());
         student.setLastname(dto.lastname());
