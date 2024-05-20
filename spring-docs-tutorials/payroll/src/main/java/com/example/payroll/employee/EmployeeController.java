@@ -1,4 +1,4 @@
-package com.example.payroll;
+package com.example.payroll.employee;
 
 import org.springframework.hateoas.CollectionModel;
 import org.springframework.hateoas.EntityModel;
@@ -64,7 +64,7 @@ public class EmployeeController {
         EntityModel<Employee> entityModel = employeeModelAssembler.toModel(updatedEmployee);
 
         return ResponseEntity
-                .created(entityModel.getRequiredLink(IanaLinkRelations.SELF.toUri()))
+                .created(entityModel.getRequiredLink(IanaLinkRelations.SELF).toUri())
                 .body(entityModel);
     }
 

@@ -1,4 +1,4 @@
-package com.example.payroll;
+package com.example.payroll.employee;
 
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;

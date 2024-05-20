@@ -1,4 +1,4 @@
-package com.example.payroll;
+package com.example.payroll.order;
 
 public class OrderNotFoundException extends RuntimeException{
 
