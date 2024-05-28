@@ -1,0 +1,30 @@
+spring:
+  thymeleaf:
+    cache: false
+#  datasource:
+#    url: <url>
+#    username: <db-username>
+#    password: <db-password>
+
+# serve securely over HTTPS
+# create keystore first: by running keytool -keystore mykeys.jks -genkey -alias tomcat -keyalg RSA
+server:
+  port: 8443
+  ssl:
+    key-store: file:\\\C:\Users\USER\learning-spring\readinglist\mykeys.jks
+    key-store-password: smkseksyen5
+    key-password: smkseksyen5
+
+# root logging level to WARN
+# Spring security logging level at DEBUG
+# write log enties into /logs/BookWorm.log
+logging:
+  path: /logs/
+  file: BookWorm.log
+  level:
+    root: WARN
+    org.springframework.security: DEBUG
+
+# custom config for @CustomProperties
+amazon:
+  associateId: chewzzz-1014
