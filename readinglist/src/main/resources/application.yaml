@@ -12,8 +12,8 @@ server:
   port: 8443
   ssl:
     key-store: file:\\\C:\Users\USER\learning-spring\readinglist\mykeys.jks
-    key-store-password: smkseksyen5
-    key-password: smkseksyen5
+    key-store-password: <password>
+    key-password: <password>
 
 # root logging level to WARN
 # Spring security logging level at DEBUG
