@@ -1,21 +1,27 @@
 package com.example.gs_rest_service;
 
-import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.http.HttpEntity;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.RequestEntity;
+import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
-import java.util.concurrent.atomic.AtomicLong;
+import static org.springframework.hateoas.server.mvc.WebMvcLinkBuilder.linkTo;
+import static org.springframework.hateoas.server.mvc.WebMvcLinkBuilder.methodOn;
 
 @RestController
 public class GreetingController {
 
     private static final String template = "Hello, %s!";
-    private final AtomicLong counter = new AtomicLong();
 
-    @GetMapping("/greeting")
-    public Greeting greeting(
-            @RequestParam(value = "name", defaultValue = "World") String name
+    @RequestMapping("/greeting")
+    public HttpEntity<Greeting> greeting(
+        @RequestParam(value = "name", defaultValue = "World") String name
     ) {
-        return new Greeting(counter.incrementAndGet(), String.format(template, name));
+        Greeting greeting = new Greeting(String.format(String.format(template, name)));
+        greeting.add(linkTo(methodOn(GreetingController.class).greeting(name)).withSelfRel());
+        return new ResponseEntity<>(greeting, HttpStatus.OK);
     }
 }
